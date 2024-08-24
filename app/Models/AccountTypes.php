@@ -23,5 +23,11 @@ public function calculationsMadin()
 {
     return $this->hasMany(Calculation::class, 'نوع_الحساب_مدين');
 }
-
+public function isDeletable()
+{
+    // Check if this account type has any related records
+    return $this->accounts()->doesntExist() &&
+           $this->calculationsDain()->doesntExist() &&
+           $this->calculationsMadin()->doesntExist();
+}
 }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('الاسم');
             $table->bigInteger('رقم الهاتف')->nullable();
             $table->string('العنوان')->nullable();
-            $table->foreignIdFor(AccountTypes::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('account_types_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->rememberToken();
             $table->timestamps();
         });

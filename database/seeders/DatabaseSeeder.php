@@ -24,7 +24,9 @@ class DatabaseSeeder extends Seeder
             AccountSeeder::class,
             OrderSeeder::class,
             PassportSeeder::class,
-
+            CoinSeeder::class,
+            CalculationSeeder::class,
+            
         ]);
     }
 }

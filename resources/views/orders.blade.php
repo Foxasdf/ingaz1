@@ -36,9 +36,16 @@
 </head>
 <body>
     <div class="container mt-5">
+        <div class="d-flex justify-content-between mb-3">
+            <h1 class="mb-0">All Orders</h1>
+            <a href="{{ route('orders-create') }}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Add New Order
+            </a>
+        </div>
+
         <div class="card">
             <div class="card-header bg-primary text-white">
-                <h1 class="mb-0">All Orders</h1>
+                <h2 class="mb-0">Orders List</h2>
             </div>
             <div class="card-body">
                 @if(session('success'))
@@ -79,6 +86,9 @@
                                 <td><span class="badge bg-{{ $order['الحالة'] == 'منتهي' ? 'success' : 'warning' }}">{{ $order['الحالة'] }}</span></td>
                                 <td>{{ $order->created_at->format('Y-m-d H:i') }}</td>
                                 <td onclick="event.stopPropagation();">
+                                    <a href="{{ route('orders-edit', $order->id) }}" class="btn btn-sm btn-warning">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
                                     @if($order['الحالة'] == 'منتهي')
                                         <form action="{{ route('order-delete', $order->id) }}" method="POST" class="d-inline">
                                             @csrf

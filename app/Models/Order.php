@@ -18,6 +18,7 @@ class Order extends Model
       'نوع التأشير',
     'عدد مرات الدخول',
     'الحالة',
+    'account_id'
         
     ];
     public function account():BelongsTo{

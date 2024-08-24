@@ -70,7 +70,6 @@
                                 <th>وجهة السفر</th>
                                 <th>نوع التأشير</th>
                                 <th>اسم الحساب</th>
-                      
                             </tr>
                         </thead>
                         <tbody>
@@ -90,7 +89,6 @@
                                 <td>{{ $passport->order['وجهة السفر'] ?? 'N/A' }}</td>
                                 <td>{{ $passport->order['نوع التأشير'] ?? 'N/A' }}</td>
                                 <td>{{ $passport->order->account['الاسم'] ?? 'N/A' }}</td>
-                              
                             </tr>
                             @empty
                             <tr>
@@ -105,6 +103,15 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
- 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const rows = document.querySelectorAll('.clickable-row');
+            rows.forEach(row => {
+                row.addEventListener('click', function() {
+                    window.location.href = this.dataset.href;
+                });
+            });
+        });
+    </script>
 </body>
 </html>

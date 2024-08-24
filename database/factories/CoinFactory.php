@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\coin;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,15 +10,13 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class CoinFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+    protected $model = coin::class;
+
+    public function definition()
     {
         return [
-            //
+            'coin' => $this->faker->unique()->currencyCode(),
+            'coin_price' => $this->faker->numberBetween(100, 10000),
         ];
     }
 }
