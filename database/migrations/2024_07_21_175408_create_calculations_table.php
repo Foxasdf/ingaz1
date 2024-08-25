@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('calculations', function (Blueprint $table) {
             $table->id();
-
             $table->timestamps();
             $table->boolean('is_second_entry')->default(false);
             $table->unsignedBigInteger('دائن');
@@ -21,8 +20,7 @@ return new class extends Migration
             $table->bigInteger('رصيد_الدائن');
             $table->bigInteger("رصيد_المدين");
             $table->string('البيان');
-            $table->bigInteger('رقم_السجل_الاساسي')->nullable();
-
+            $table->unsignedBigInteger('main_record_id')->nullable(); // Changed from رقم السجل الاساسي to main_record_id
             
             $table->unsignedBigInteger('نوع_الحساب_دائن');
             $table->unsignedBigInteger('نوع_الحساب_مدين');

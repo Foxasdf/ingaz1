@@ -41,26 +41,6 @@ class CalculationController extends Controller
     }
 
     // Store a newly created calculation in the database
-    public function store(Request $request)
-    {
-        // Validate and create the calculation
-        $validatedData = $request->validate([
-            'نوع_الحساب_دائن' => 'required|exists:account_types,id',
-            'دائن' => 'required|exists:accounts,id',
-            'نوع_الحساب_مدين' => 'required|exists:account_types,id',
-            'مدين' => 'required|exists:accounts,id',
-            'coin_id' => 'required|exists:coins,id',
-            'رصيد_الدائن' => 'required|numeric',
-            'رصيد_المدين' => 'required|numeric',
-            'البيان' => 'nullable|string|max:255',
-            'رقم السجل الاساسي' => 'nullable|numeric',
-            'passport_id' => 'nullable|exists:passports,id',
-        ]);
-    
-        Calculation::create($validatedData);
-    
-        return redirect()->route('calculations.index')->with('success', 'Calculation created successfully!');
-    }
 
     // Display the specified calculation
     public function show($id): View
@@ -86,6 +66,32 @@ class CalculationController extends Controller
 
 
     // Update the specified calculation in the database
+    public function store(Request $request)
+    {
+        // Validate the request data
+        $validatedData = $request->validate([
+            'نوع_الحساب_دائن' => 'required|exists:account_types,id',
+            'دائن' => 'required|exists:accounts,id',
+            'نوع_الحساب_مدين' => 'required|exists:account_types,id',
+            'مدين' => 'required|exists:accounts,id',
+            'coin_id' => 'required|exists:coins,id',
+            'رصيد_الدائن' => 'required|numeric',
+            'رصيد_المدين' => 'required|numeric',
+            'البيان' => 'nullable|string|max:255',
+            'main_record_id' => 'nullable|numeric',
+            'passport_id' => 'nullable|exists:passports,id',
+            'created_at' => 'nullable|date',  // Validate the created_at field
+        ]);
+    
+        // If the created_at is not set, default it to the current date
+        $validatedData['created_at'] = $validatedData['created_at'] ?? now();
+    
+        // Create the calculation
+        Calculation::create($validatedData);
+    
+        return redirect()->route('calculations.index')->with('success', 'Calculation created successfully!');
+    }
+    
     public function update(Request $request, $id)
     {
         $calculation = Calculation::findOrFail($id);
@@ -97,13 +103,16 @@ class CalculationController extends Controller
             'رصيد_الدائن' => 'required|numeric',
             'رصيد_المدين' => 'required|numeric',
             'البيان' => 'nullable|string|max:255',
-            'رقم_السجل_الاساسي' => 'nullable|numeric',
-
+            'main_record_id' => 'nullable|numeric',
             'نوع_الحساب_دائن' => 'required|exists:account_types,id',
             'نوع_الحساب_مدين' => 'required|exists:account_types,id',
             'passport_id' => 'nullable|exists:passports,id',
             'coin_id' => 'required|exists:coins,id',
+            'created_at' => 'nullable|date', // Allow setting the creation date
         ]);
+    
+        // Set the creation date to now if not provided
+        $validatedData['created_at'] = $validatedData['created_at'] ?? $calculation->created_at;
     
         // Update the original calculation
         $calculation->update($validatedData);
@@ -116,11 +125,11 @@ class CalculationController extends Controller
                 'رصيد_الدائن' => $validatedData['رصيد_المدين'], // Swap رصيد values
                 'رصيد_المدين' => $validatedData['رصيد_الدائن'],
                 'البيان' => $validatedData['البيان'],
-                'رقم_السجل_الاساسي' => $validatedData['رقم_السجل_الاساسي'],
                 'نوع_الحساب_دائن' => $validatedData['نوع_الحساب_مدين'], // Swap account types
                 'نوع_الحساب_مدين' => $validatedData['نوع_الحساب_دائن'],
                 'passport_id' => $validatedData['passport_id'],
                 'coin_id' => $validatedData['coin_id'],
+                'created_at' => $validatedData['created_at'], // Ensure the counterpart has the same creation date
             ];
     
             // Update the counterpart

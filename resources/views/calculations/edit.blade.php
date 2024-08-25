@@ -109,11 +109,7 @@
     <textarea id="البيان" name="البيان" class="form-control" required>{{ $calculation->البيان }}</textarea>
 </div>
 
-<!-- رقم السجل الاساسي -->
-<div class="mb-3">
-    <label for="رقم_السجل_الاساسي" class="form-label">رقم السجل الاساسي</label>
-    <input type="number" id="رقم_السجل_الاساسي" name="رقم_السجل_الاساسي" class="form-control" value="{{ $calculation->رقم_السجل_الاساسي }}">
-</div>
+
 
 <!-- Passport -->
 <div class="mb-3">

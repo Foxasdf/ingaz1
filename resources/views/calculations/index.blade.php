@@ -8,36 +8,76 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        .clickable-row {
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        h1 {
+            color: #343a40;
+            font-weight: bold;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .table {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        }
+        .table thead {
+            background-color: #343a40;
+            color: #ffffff;
+        }
+        .table thead th {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .table tbody tr {
+            transition: background-color 0.3s ease;
+        }
+        .table tbody tr:hover {
+            background-color: #e9ecef;
             cursor: pointer;
         }
-        .clickable-row:hover {
-            background-color: #f1f1f1;
+        .table tbody tr:active {
+            background-color: #dee2e6;
+        }
+        .text-center i {
+            color: #343a40;
+        }
+        .alert {
+            border-radius: 10px;
         }
     </style>
-
-    <!-- Display success message -->
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-
-    <!-- Display error message -->
-    @if (session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
 </head>
 <body>
     <div class="container-fluid mt-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1>سجلات المحاسبة الغير مثبتة</h1>
+            <h1><i class="fas fa-book"></i> سجلات المحاسبة الغير مثبتة</h1>
             <a href="{{ route('calculations.create') }}" class="btn btn-primary">
                 <i class="fas fa-plus"></i> أضافة سجل جديد
             </a>
         </div>
+
+        <!-- Display success message -->
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <!-- Display error message -->
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
 
         <div class="table-responsive">
             <table class="table table-striped table-hover">
@@ -55,6 +95,7 @@
                         <th>نوع الحساب مدين</th>
                         <th>Passport</th>
                         <th>Coin</th>
+                        <th>تاريخ السجل</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
@@ -68,11 +109,12 @@
                             <td>{{ $calculation['رصيد_الدائن'] }}</td>
                             <td>{{ $calculation['رصيد_المدين'] }}</td>
                             <td>{{ $calculation->البيان }}</td>
-                            <td>{{ $calculation['رقم_السجل_الاساسي'] }}</td>
+                            <td>{{ $calculation['main_record_id'] }}</td>
                             <td>{{ $calculation->accountTypeDain->النوع ?? 'N/A' }}</td>
                             <td>{{ $calculation->accountTypeMadin->النوع ?? 'N/A' }}</td>
                             <td>{{ $calculation->passport['الاسم'] ?? 'N/A' }}</td>
                             <td>{{ $calculation->coin->coin ?? 'N/A' }}</td>
+                            <td>{{ $calculation->created_at->format('Y-m-d H:i') }}</td>
                             <td class="text-center">
                                 <a href="{{ route('calculations.edit', $calculation->id) }}" class="btn btn-sm btn-warning">
                                     <i class="fas fa-edit"></i> Edit
@@ -96,7 +138,6 @@
                         </tr>
                     @endforelse
                 </tbody>
-            
             </table>
         </div>
     </div>

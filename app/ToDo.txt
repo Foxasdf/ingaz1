@@ -3,3 +3,4 @@ fix the new order
 5-add/update coin
 6-add/update calculation (remove the edit and make a show blade)
 7-new table for confirming calcolation
+8-make soft delete for calculation and other table

@@ -15,10 +15,11 @@ class CoinSeeder extends Seeder
     {
         // Create some predefined coins
         $predefinedCoins = [
-            ['coin' => 'USD', 'coin_price' => 100],
+            ['coin' => 'USD', 'coin_price' => 1],
             ['coin' => 'EUR', 'coin_price' => 120],
             ['coin' => 'GBP', 'coin_price' => 140],
             ['coin' => 'JPY', 'coin_price' => 1],
+            ['coin' => 'SYR', 'coin_price' => 1],
         ];
 
         foreach ($predefinedCoins as $coin) {
@@ -26,6 +27,6 @@ class CoinSeeder extends Seeder
         }
 
         // Create additional random coins
-        Coin::factory()->count(6)->create();
+        Coin::factory()->count(5)->create();
     }
 }

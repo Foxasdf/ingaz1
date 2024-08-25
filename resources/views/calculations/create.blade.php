@@ -107,10 +107,7 @@
             <textarea id="البيان" name="البيان" class="form-control" required></textarea>
         </div>
 
-        <div class="mb-3">
-            <label for="رقم_السجل_الاساسي" class="form-label">رقم السجل الاساسي</label>
-            <input type="number" id="رقم_السجل_الاساسي" name="رقم السجل الاساسي" class="form-control">
-        </div>
+
 
 
 
@@ -122,6 +119,11 @@
                     <option value="{{ $passport->id }}">{{ $passport['الاسم'] }} - {{ $passport['رقم الجواز'] }}</option>
                 @endforeach
             </select>
+        </div>
+
+        <div class="form-group">
+            <label for="created_at">تاريخ السجل</label>
+            <input type="date" name="created_at" id="created_at" class="form-control" value="{{ old('created_at', now()->format('Y-m-d')) }}">
         </div>
 
         <button type="submit" class="btn btn-primary">Create</button>
