@@ -43,9 +43,9 @@ class AccountTypesController
         $request->validate([
             'النوع' => 'required|string|max:255',
         ]);
-
+    
         AccountTypes::create($request->all());
-
+    
         return redirect()->route('account-types.index')->with('success', 'Account type created successfully.');
     }
 
