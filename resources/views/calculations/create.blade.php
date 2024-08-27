@@ -67,6 +67,24 @@
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
+            <!--- passport details card -->
+
+
+           @keyframes popIn {
+               0% {
+            opacity: 0;
+                 transform: scale(0.8);
+                 }
+                100% {
+                    opacity: 1;
+                    transform: scale(1);
+        }
+    }
+
+    .passport-details {
+        animation: popIn 0.3s ease-out;
+    }
+
         }
     </style>
 </head>
@@ -195,6 +213,9 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const accountTypeDainSelect = document.getElementById('accountTypeDain');
@@ -262,35 +283,45 @@ coinSelect.addEventListener('change', updateBalances);
 
 // Function to display passport details
 function displayPassportDetails() {
-const passportId = passportSelect.value;
+    const passportId = passportSelect.value;
 
-if (passportId) {
-    fetch(`/calculations/passports/${passportId}`)
-        .then(response => response.json())
-        .then(passport => {
-            passportDetails.classList.remove('d-none');
-            passportInfo.innerHTML = `
-                <p><strong>الحالة:</strong> ${passport['الحالة']}</p>
-                <p><strong>الاسم:</strong> ${passport['الاسم']}</p>
-                <p><strong>رقم الجواز:</strong> ${passport['رقم الجواز']}</p>
-                <p><strong>الاسم الاجنبي:</strong> ${passport['الاسم الاجنبي']}</p>
-                <p><strong>اسم الاب:</strong> ${passport['اسم الاب']}</p>
-                <p><strong>الشهرة:</strong> ${passport['الشهرة']}</p>
-                <p><strong>اسم الاب اجنبي:</strong> ${passport['اسم الاب اجنبي']}</p>
-                <p><strong>الشهرة اجنبي:</strong> ${passport['الشهرة اجنبي']}</p>
-                <p><strong>نوع الجواز:</strong> ${passport['نوع الجواز']}</p>
-                <p><strong>الجنسية:</strong> ${passport['الجنسية']}</p>
-                <p><strong>الجنس:</strong> ${passport['الجنس']}</p>
-                <p><strong>تاريخ الاستلام:</strong> ${passport['تاريخ الاستلام']}</p>
-                <p><strong>تاريخ الارسال:</strong> ${passport['تاريخ الارسال']}</p>
-                <p><strong>تاريخ التسليم:</strong> ${passport['تاريخ التسليم']}</p>
-            `;
-        })
-        .catch(error => console.error('Error fetching passport details:', error));
-} else {
-    passportDetails.classList.add('d-none');
-    passportInfo.innerHTML = '';
-}
+    if (passportId) {
+        fetch(`/calculations/passports/${passportId}`)
+            .then(response => response.json())
+            .then(passport => {
+                passportDetails.classList.remove('d-none');
+                
+                // Remove the animation class if it exists
+                passportDetails.classList.remove('passport-details');
+                
+                // Force a reflow to restart the animation
+                void passportDetails.offsetWidth;
+                
+                // Add the animation class
+                passportDetails.classList.add('passport-details');
+                
+                passportInfo.innerHTML = `
+                    <p><strong>الحالة:</strong> ${passport['الحالة']}</p>
+                    <p><strong>الاسم:</strong> ${passport['الاسم']}</p>
+                    <p><strong>رقم الجواز:</strong> ${passport['رقم الجواز']}</p>
+                    <p><strong>الاسم الاجنبي:</strong> ${passport['الاسم الاجنبي']}</p>
+                    <p><strong>اسم الاب:</strong> ${passport['اسم الاب']}</p>
+                    <p><strong>الشهرة:</strong> ${passport['الشهرة']}</p>
+                    <p><strong>اسم الاب اجنبي:</strong> ${passport['اسم الاب اجنبي']}</p>
+                    <p><strong>الشهرة اجنبي:</strong> ${passport['الشهرة اجنبي']}</p>
+                    <p><strong>نوع الجواز:</strong> ${passport['نوع الجواز']}</p>
+                    <p><strong>الجنسية:</strong> ${passport['الجنسية']}</p>
+                    <p><strong>الجنس:</strong> ${passport['الجنس']}</p>
+                    <p><strong>تاريخ الاستلام:</strong> ${passport['تاريخ الاستلام']}</p>
+                    <p><strong>تاريخ الارسال:</strong> ${passport['تاريخ الارسال']}</p>
+                    <p><strong>تاريخ التسليم:</strong> ${passport['تاريخ التسليم']}</p>
+                `;
+            })
+            .catch(error => console.error('Error fetching passport details:', error));
+    } else {
+        passportDetails.classList.add('d-none');
+        passportInfo.innerHTML = '';
+    }
 }
 
 // Event listener to display passport details when the user selects a passport
