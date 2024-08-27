@@ -18,11 +18,11 @@ return new class extends Migration
 
 
             $table->foreignIdFor(Account::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string( 'اسم الزبون');
-            $table->string('وجهة السفر');
-            $table->string('نوع التأشير');
+            $table->string( 'اسم_الزبون');
+            $table->string('وجهة_السفر');
+            $table->string('نوع_التأشير');
 
-            $table->string('عدد مرات الدخول');
+            $table->string('عدد_مرات_الدخول');
             $table->string('الحالة');
             $table->timestamps();
 

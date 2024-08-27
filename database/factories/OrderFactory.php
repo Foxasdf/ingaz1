@@ -25,10 +25,10 @@ class OrderFactory extends Factory
         $status=['تحت التنفيذ','منتهي'];
         return [       
             'account_id'=> Account::inRandomOrder()->first()?->id,
-            'اسم الزبون'=> fake()->randomElement($names),
-             'وجهة السفر'=>fake()->randomElement($des),
-             'نوع التأشير'=>fake()->randomElement( $type),
-           'عدد مرات الدخول'=>fake()->randomElement( $count),
+            'اسم_الزبون'=> fake()->randomElement($names),
+             'وجهة_السفر'=>fake()->randomElement($des),
+             'نوع_التأشير'=>fake()->randomElement( $type),
+           'عدد_مرات_الدخول'=>fake()->randomElement( $count),
            'الحالة'=>fake()->randomElement( $status),
         ];
     }

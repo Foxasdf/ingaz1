@@ -48,10 +48,10 @@ class OrderController
         
         // Update order details
         $order->update($request->only([
-            'اسم الزبون',
-            'وجهة السفر',
-            'نوع التأشير',
-            'عدد مرات الدخول',
+            'اسم_الزبون',
+            'وجهة_السفر',
+            'نوع_التأشير',
+            'عدد_مرات_الدخول',
             'الحالة',
         ]));
 
@@ -74,10 +74,10 @@ class OrderController
     public function store(Request $request): RedirectResponse
     {
         $validatedData = $request->validate([
-            'اسم الزبون' => 'required|string|max:255',
-            'وجهة السفر' => 'required|string|max:255',
-            'نوع التأشير' => 'required|string|max:255',
-            'عدد مرات الدخول' => 'required|string|max:255',
+            'اسم_الزبون' => 'required|string|max:255',
+            'وجهة_السفر' => 'required|string|max:255',
+            'نوع_التأشير' => 'required|string|max:255',
+            'عدد_مرات_الدخول' => 'required|string|max:255',
             'الحالة' => 'required|string|max:255',
             'account_id' => 'required|exists:accounts,id',
         ]);

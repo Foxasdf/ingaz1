@@ -40,10 +40,10 @@
                 <h5 class="card-title">Order Information</h5>
                 <p><strong>ID:</strong> {{ $order->id }}</p>
                 <p><strong>اسم الحساب:</strong> {{ $order->account->الاسم ?? 'N/A' }}</p>
-                <p><strong>اسم الزبون:</strong> {{ $order['اسم الزبون'] }}</p>
-                <p><strong>وجهة السفر:</strong> {{ $order['وجهة السفر'] }}</p>
-                <p><strong>نوع التأشير:</strong> {{ $order['نوع التأشير'] }}</p>
-                <p><strong>عدد مرات الدخول:</strong> {{ $order['عدد مرات الدخول'] }}</p>
+                <p><strong>اسم الزبون:</strong> {{ $order['اسم_الزبون'] }}</p>
+                <p><strong>وجهة السفر:</strong> {{ $order['وجهة_السفر'] }}</p>
+                <p><strong>نوع التأشير:</strong> {{ $order['نوع_التأشير'] }}</p>
+                <p><strong>عدد مرات الدخول:</strong> {{ $order['عدد_مرات_الدخول'] }}</p>
                 <p><strong>الحالة:</strong> {{ $order['الحالة'] }}</p>
             </div>
         </div>

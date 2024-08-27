@@ -51,19 +51,19 @@
                     @csrf
                     <div class="mb-3">
                         <label for="اسم_الزبون" class="form-label">اسم الزبون</label>
-                        <input type="text" name="اسم الزبون" class="form-control" id="اسم_الزبون" value="{{ old('اسم الزبون') }}" required>
+                        <input type="text" name="اسم_الزبون" class="form-control" id="اسم_الزبون" value="{{ old('اسم الزبون') }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="وجهة_السفر" class="form-label">وجهة السفر</label>
-                        <input type="text" name="وجهة السفر" class="form-control" id="وجهة_السفر" value="{{ old('وجهة السفر') }}" required>
+                        <input type="text" name="وجهة_السفر" class="form-control" id="وجهة_السفر" value="{{ old('وجهة السفر') }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="نوع_التأشير" class="form-label">نوع التأشير</label>
-                        <input type="text" name="نوع التأشير" class="form-control" id="نوع_التأشير" value="{{ old('نوع التأشير') }}" required>
+                        <input type="text" name="نوع_التأشير" class="form-control" id="نوع_التأشير" value="{{ old('نوع التأشير') }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="عدد<em>مرات</em>الدخول" class="form-label">عدد مرات الدخول</label>
-                        <input type="text" name="عدد مرات الدخول" class="form-control" id="عدد<em>مرات</em>الدخول" value="{{ old('عدد مرات الدخول') }}" required>
+                        <input type="text" name="عدد_مرات_الدخول" class="form-control" id="عدد<em>مرات</em>الدخول" value="{{ old('عدد مرات الدخول') }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="الحالة" class="form-label">الحالة</label>

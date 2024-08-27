@@ -44,22 +44,22 @@
                     <h5 class="card-title">Order Information</h5>
                     <div class="mb-3">
                         <label for="اسم_الزبون" class="form-label">اسم الزبون</label>
-                        <input type="text" class="form-control" id="اسم_الزبون" name="اسم الزبون" value="{{ $order['اسم الزبون'] }}" required>
+                        <input type="text" class="form-control" id="اسم_الزبون" name="اسم الزبون" value="{{ $order['اسم_الزبون'] }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="وجهة_السفر" class="form-label">وجهة السفر</label>
-                        <input type="text" class="form-control" id="وجهة_السفر" name="وجهة السفر" value="{{ $order['وجهة السفر'] }}" required>
+                        <input type="text" class="form-control" id="وجهة_السفر" name="وجهة السفر" value="{{ $order['وجهة_السفر'] }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="نوع_التأشير" class="form-label">نوع التأشير</label>
-                        <input type="text" class="form-control" id="نوع_التأشير" name="نوع التأشير" value="{{ $order['نوع التأشير'] }}" required>
+                        <input type="text" class="form-control" id="نوع_التأشير" name="نوع التأشير" value="{{ $order['نوع_التأشير'] }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="عدد<em>مرات</em>الدخول" class="form-label">عدد مرات الدخول</label>
                         <select class="form-select" id="عدد<em>مرات</em>الدخول" name="عدد مرات الدخول" required>
-                            <option value="مرة" {{ $order['عدد مرات الدخول'] == 'مرة' ? 'selected' : '' }}>مرة</option>
-                            <option value="عدة مرات" {{ $order['عدد مرات الدخول'] == 'عدة مرات' ? 'selected' : '' }}>عدة مرات</option>
-                            <option value="ذهاب وأياب" {{ $order['عدد مرات الدخول'] == 'ذهاب وأياب' ? 'selected' : '' }}>ذهاب وأياب</option>
+                            <option value="مرة" {{ $order['عدد_مرات_الدخول'] == 'مرة' ? 'selected' : '' }}>مرة</option>
+                            <option value="عدة مرات" {{ $order['عدد_مرات_الدخول'] == 'عدة مرات' ? 'selected' : '' }}>عدة مرات</option>
+                            <option value="ذهاب وأياب" {{ $order['عدد_مرات_الدخول'] == 'ذهاب وأياب' ? 'selected' : '' }}>ذهاب وأياب</option>
                         </select>
                         <div class="mb-3">
                             <label for="الحالة" class="form-label">الحالة</label>

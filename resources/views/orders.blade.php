@@ -93,10 +93,10 @@
                             <tr class="clickable-row" data-href="{{ route('order-details', $order->id) }}">
                                 <td>{{ $order->id }}</td>
                                 <td>{{ $order->account->الاسم ?? 'N/A' }}</td>
-                                <td>{{ $order['اسم الزبون'] }}</td>
-                                <td>{{ $order['وجهة السفر'] }}</td>
-                                <td>{{ $order['نوع التأشير'] }}</td>
-                                <td>{{ $order['عدد مرات الدخول'] }}</td>
+                                <td>{{ $order['اسم_الزبون'] }}</td>
+                                <td>{{ $order['وجهة_السفر'] }}</td>
+                                <td>{{ $order['نوع_التأشير'] }}</td>
+                                <td>{{ $order['عدد_مرات_الدخول'] }}</td>
                                 <td><span class="badge bg-{{ $order['الحالة'] == 'منتهي' ? 'success' : 'warning' }}">{{ $order['الحالة'] }}</span></td>
                                 <td>{{ $order->created_at->format('Y-m-d H:i') }}</td>
                                 <td onclick="event.stopPropagation();">
