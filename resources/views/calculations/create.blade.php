@@ -7,7 +7,68 @@
     <title>Create Calculation</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+    <style>
+        body {
+            background-color: #f8f9fa;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            animation: slideIn 1s ease-in-out;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+        .mb-3 {
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-in-out;
+        }
+        label {
+            font-weight: bold;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            animation: pulse 1s infinite;
+        }
+        .btn-primary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+        .passport-details {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @keyframes fadeInDown {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideIn {
+            0% { opacity: 0; transform: translateX(-20px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
@@ -107,18 +168,21 @@
             <textarea id="البيان" name="البيان" class="form-control" required></textarea>
         </div>
 
-
-
-
-
         <!-- Passport dropdown with both 'الاسم' and 'رقم الجواز' -->
         <div class="mb-3">
             <label for="passport" class="form-label">Passport</label>
             <select id="passport" name="passport_id" class="form-control">
+                <option value="">Select Passport</option>
                 @foreach($passports as $passport)
                     <option value="{{ $passport->id }}">{{ $passport['الاسم'] }} - {{ $passport['رقم الجواز'] }}</option>
                 @endforeach
             </select>
+        </div>
+
+        <!-- Passport Details Card -->
+        <div id="passportDetails" class="passport-details d-none">
+            <h5>Passport Details</h5>
+            <div id="passportInfo"></div>
         </div>
 
         <div class="form-group">
@@ -142,6 +206,9 @@
         const coinSelect = document.getElementById('coin');
         const رصيد_الدائنInput = document.getElementById('رصيد_الدائن');
         const رصيد_المدينInput = document.getElementById('رصيد_المدين');
+        const passportSelect = document.getElementById('passport');
+        const passportDetails = document.getElementById('passportDetails');
+        const passportInfo = document.getElementById('passportInfo');
 
         // Function to update account dropdowns
         function updateAccountDropdown(accountTypeSelect, accountSelect) {
@@ -184,15 +251,51 @@
             const balanceDain = amountDain * coinPrice;
             const balanceMadin = amountMadin * coinPrice;
 
-            رصيد_الدائنInput.value = balanceDain;
-            رصيد_المدينInput.value = balanceMadin;
-        }
+               رصيد_الدائنInput.value = balanceDain;
+               رصيد_المدينInput.value = balanceMadin;
+}
 
-        // Event listeners to update balances when user inputs amount or changes the coin
-        amountDainInput.addEventListener('input', updateBalances);
-        amountMadinInput.addEventListener('input', updateBalances);
-        coinSelect.addEventListener('change', updateBalances);
-    });
+// Event listeners to update balances when user inputs amount or changes the coin
+amountDainInput.addEventListener('input', updateBalances);
+amountMadinInput.addEventListener('input', updateBalances);
+coinSelect.addEventListener('change', updateBalances);
+
+// Function to display passport details
+function displayPassportDetails() {
+const passportId = passportSelect.value;
+
+if (passportId) {
+    fetch(`/calculations/passports/${passportId}`)
+        .then(response => response.json())
+        .then(passport => {
+            passportDetails.classList.remove('d-none');
+            passportInfo.innerHTML = `
+                <p><strong>الحالة:</strong> ${passport['الحالة']}</p>
+                <p><strong>الاسم:</strong> ${passport['الاسم']}</p>
+                <p><strong>رقم الجواز:</strong> ${passport['رقم الجواز']}</p>
+                <p><strong>الاسم الاجنبي:</strong> ${passport['الاسم الاجنبي']}</p>
+                <p><strong>اسم الاب:</strong> ${passport['اسم الاب']}</p>
+                <p><strong>الشهرة:</strong> ${passport['الشهرة']}</p>
+                <p><strong>اسم الاب اجنبي:</strong> ${passport['اسم الاب اجنبي']}</p>
+                <p><strong>الشهرة اجنبي:</strong> ${passport['الشهرة اجنبي']}</p>
+                <p><strong>نوع الجواز:</strong> ${passport['نوع الجواز']}</p>
+                <p><strong>الجنسية:</strong> ${passport['الجنسية']}</p>
+                <p><strong>الجنس:</strong> ${passport['الجنس']}</p>
+                <p><strong>تاريخ الاستلام:</strong> ${passport['تاريخ الاستلام']}</p>
+                <p><strong>تاريخ الارسال:</strong> ${passport['تاريخ الارسال']}</p>
+                <p><strong>تاريخ التسليم:</strong> ${passport['تاريخ التسليم']}</p>
+            `;
+        })
+        .catch(error => console.error('Error fetching passport details:', error));
+} else {
+    passportDetails.classList.add('d-none');
+    passportInfo.innerHTML = '';
+}
+}
+
+// Event listener to display passport details when the user selects a passport
+passportSelect.addEventListener('change', displayPassportDetails);
+});
 </script>
 </body>
 </html>

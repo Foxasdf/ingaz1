@@ -1,12 +1,11 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>الحسابات</title>
+    <title>العملات</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -81,11 +80,11 @@
     </style>
 </head>
 <body>
-    <div class="container-fluid mt-5">
+    <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1><i class="fas fa-book"></i> سجلات المحاسبة الغير مثبتة</h1>
-            <a href="{{ route('calculations.create') }}" class="btn btn-primary">
-                <i class="fas fa-plus"></i> أضافة سجل جديد
+            <h1><i class="fas fa-coins"></i> قائمة العملات</h1>
+            <a href="{{ route('coins.create') }}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> إضافة عملة جديدة
             </a>
         </div>
 
@@ -108,57 +107,37 @@
                 <thead class="table-dark">
                     <tr>
                         <th>ID</th>
-                        <th>Is Second Entry</th>
-                        <th>دائن</th>
-                        <th>مدين</th>
-                        <th>رصيد الدائن</th>
-                        <th>رصيد المدين</th>
-                        <th>البيان</th>
-                        <th>رقم السجل الاساسي</th>
-                        <th>نوع الحساب دائن</th>
-                        <th>نوع الحساب مدين</th>
-                        <th>Passport</th>
-                        <th>Coin</th>
-                        <th>تاريخ السجل</th>
-                        <th class="text-center">Actions</th>
+                        <th>العملة</th>
+                        <th>سعر العملة</th>
+                        <th>تاريخ الإنشاء</th>
+                        <th>تاريخ التحديث</th>
+                        <th class="text-center">الإجراءات</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse($calculations as $calculation)
-                        <tr class="clickable-row" data-href="{{ route('calculations.show', $calculation->id) }}">
-                            <td>{{ $calculation->id }}</td>
-                            <td>{{ $calculation->is_second_entry ? 'Yes' : 'No' }}</td>
-                            <td>{{ $calculation->accountDain['الاسم'] ?? 'N/A' }}</td>
-                            <td>{{ $calculation->accountMadin['الاسم'] ?? 'N/A' }}</td>
-                            <td>{{ $calculation['رصيد_الدائن'] }}</td>
-                            <td>{{ $calculation['رصيد_المدين'] }}</td>
-                            <td>{{ $calculation->البيان }}</td>
-                            <td>{{ $calculation['main_record_id'] }}</td>
-                            <td>{{ $calculation->accountTypeDain->النوع ?? 'N/A' }}</td>
-                            <td>{{ $calculation->accountTypeMadin->النوع ?? 'N/A' }}</td>
-                            <td>{{ $calculation->passport['الاسم'] ?? 'N/A' }}</td>
-                            <td>{{ $calculation->coin->coin ?? 'N/A' }}</td>
-                            <td>{{ $calculation->created_at->format('Y-m-d H:i') }}</td>
+                    @forelse($coins as $coin)
+                        <tr class="clickable-row" data-href="{{ route('coins.show', $coin->id) }}">
+                            <td>{{ $coin->id }}</td>
+                            <td>{{ $coin->coin }}</td>
+                            <td>{{ $coin->coin_price }}</td>
+                            <td>{{ $coin->created_at->format('Y-m-d H:i') }}</td>
+                            <td>{{ $coin->updated_at->format('Y-m-d H:i') }}</td>
                             <td class="text-center">
-                                <a href="{{ route('calculations.edit', $calculation->id) }}" class="btn btn-sm btn-warning">
-                                    <i class="fas fa-edit"></i> Edit
+                                <a href="{{ route('coins.edit', $coin->id) }}" class="btn btn-sm btn-warning">
+                                    <i class="fas fa-edit"></i> تعديل
                                 </a>
-
-                                <!-- Only show the delete button if it's not a counterpart -->
-                                @if(!$calculation->is_second_entry)
-                                    <form action="{{ route('calculations.destroy', $calculation->id) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">
-                                            <i class="fas fa-trash"></i> Delete
-                                        </button>
-                                    </form>
-                                @endif
+                                <form action="{{ route('coins.destroy', $coin->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('هل أنت متأكد من حذف هذه العملة؟')">
+                                        <i class="fas fa-trash"></i> حذف
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="14" class="text-center">No calculations found.</td>
+                            <td colspan="6" class="text-center">لا توجد عملات.</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -171,8 +150,10 @@
         document.addEventListener('DOMContentLoaded', function () {
             const rows = document.querySelectorAll('.clickable-row');
             rows.forEach(row => {
-                row.addEventListener('click', function () {
-                    window.location.href = this.dataset.href;
+                row.addEventListener('click', function (event) {
+                    if (event.target.tagName !== 'BUTTON' && event.target.tagName !== 'I' && event.target.tagName !== 'A') {
+                        window.location.href = this.dataset.href;
+                    }
                 });
             });
         });

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,58 @@
     <title>Edit Calculation</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            animation: fadeIn 1s ease-in-out;
+        }
+        h1 {
+            color: #343a40;
+            font-weight: bold;
+            animation: fadeInDown 1s ease-in-out;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            transition: background-color 0.3s ease;
+            animation: pulse 1s infinite;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 1s ease-in-out;
+        }
+        .card-header {
+            background-color: #343a40;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        .alert {
+            border-radius: 10px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @keyframes fadeInDown {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
@@ -91,43 +144,40 @@
             </div>
 
             <!-- رصيد الدائن -->
-<!-- رصيد الدائن -->
-<div class="mb-3">
-    <label for="رصيد_الدائن" class="form-label">رصيد الدائن</label>
-    <input type="number" id="رصيد_الدائن" name="رصيد_الدائن" class="form-control" value="{{ $calculation->رصيد_الدائن }}" required>
-</div>
+            <div class="mb-3">
+                <label for="رصيد_الدائن" class="form-label">رصيد الدائن</label>
+                <input type="number" id="رصيد_الدائن" name="رصيد_الدائن" class="form-control" value="{{ $calculation->رصيد_الدائن }}" required>
+            </div>
 
-<!-- رصيد المدين -->
-<div class="mb-3">
-    <label for="رصيد_المدين" class="form-label">رصيد المدين</label>
-    <input type="number" id="رصيد_المدين" name="رصيد_المدين" class="form-control" value="{{ $calculation->رصيد_المدين }}" required>
-</div>
+            <!-- رصيد المدين -->
+            <div class="mb-3">
+                <label for="رصيد_المدين" class="form-label">رصيد المدين</label>
+                <input type="number" id="رصيد_المدين" name="رصيد_المدين" class="form-control" value="{{ $calculation->رصيد_المدين }}" required>
+            </div>
 
-<!-- البيان -->
-<div class="mb-3">
-    <label for="البيان" class="form-label">البيان</label>
-    <textarea id="البيان" name="البيان" class="form-control" required>{{ $calculation->البيان }}</textarea>
-</div>
+            <!-- البيان -->
+            <div class="mb-3">
+                <label for="البيان" class="form-label">البيان</label>
+                <textarea id="البيان" name="البيان" class="form-control" required>{{ $calculation->البيان }}</textarea>
+            </div>
 
+            <!-- Passport -->
+            <div class="mb-3">
+                <label for="passport" class="form-label">Passport</label>
+                <select id="passport" name="passport_id" class="form-control">
+                    <option value="">Select Passport</option>
+                    @foreach($passports as $passport)
+                        <option value="{{ $passport->id }}" {{ $calculation->passport_id == $passport->id ? 'selected' : '' }}>
+                            {{ $passport->الاسم }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
 
+            <button type="submit" class="btn btn-primary">Update Calculation</button>
+        </form>
+    </div>
 
-<!-- Passport -->
-<div class="mb-3">
-    <label for="passport" class="form-label">Passport</label>
-    <select id="passport" name="passport_id" class="form-control">
-        <option value="">Select Passport</option>
-        @foreach($passports as $passport)
-            <option value="{{ $passport->id }}" {{ $calculation->passport_id == $passport->id ? 'selected' : '' }}>
-                {{ $passport->الاسم }}
-            </option>
-        @endforeach
-    </select>
-</div>
-
-<button type="submit" class="btn btn-primary">Update Calculation</button>
-</form>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

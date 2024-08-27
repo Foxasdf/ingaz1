@@ -4,6 +4,7 @@
 use App\Http\Controllers\web\CalculationController;
 use App\Http\Controllers\web\AccountTypesController;
 use App\Http\Controllers\web\AccountController as AccountController;
+use App\Http\Controllers\web\CoinController;
 use App\Http\Controllers\web\OrderController;
 use App\Http\Controllers\web\PassportController;
 use Illuminate\Support\Facades\Route;
@@ -60,6 +61,18 @@ Route::prefix('calculations')->group(function () {
     Route::delete('/{id}', [CalculationController::class, 'destroy'])->name('calculations.destroy');
     Route::get('/accounts/by-type/{accountTypeId}', [CalculationController::class, 'getAccountsByType']);
 });
+
+Route::prefix('coins')->group(function () {
+    Route::get('/', [CoinController::class, 'index'])->name('coins.index');
+    Route::get('/create', [CoinController::class, 'create'])->name('coins.create');
+    Route::post('/', [CoinController::class, 'store'])->name('coins.store');
+    Route::get('/{id}', [CoinController::class, 'show'])->name('coins.show');
+    Route::get('/{id}/edit', [CoinController::class, 'edit'])->name('coins.edit');
+    Route::put('/{id}', [CoinController::class, 'update'])->name('coins.update');
+    Route::delete('/{id}', [CoinController::class, 'destroy'])->name('coins.destroy');
+});
+
+Route::get('/calculations/passports/{passportId}', [CalculationController::class, 'getPassportDetails']);
 
 
 Route::get('/admin/dashboard', function () {

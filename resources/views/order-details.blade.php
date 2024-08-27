@@ -6,11 +6,35 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Order Details</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            animation: fadeInUp 1s ease-in-out;
+        }
+        .card-header {
+            background-color: #007bff;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
         <h1 class="mb-4">Order Details</h1>
-        
+
         <div class="card mb-4">
             <div class="card-body">
                 <h5 class="card-title">Order Information</h5>

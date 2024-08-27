@@ -1,4 +1,3 @@
-@csrf
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,13 +10,23 @@
     <style>
         body {
             background-color: #f8f9fa;
+            animation: fadeIn 1s ease-in-out;
         }
         .card {
             border: none;
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            animation: fadeInUp 1s ease-in-out;
+        }
+        .card-header {
+            background-color: #3498db; /* Example: Vibrant blue */
+            color: white;
+            border-radius: 10px 10px 0 0;
         }
         .table th {
             font-weight: 600;
+            background-color: #2980b9; /* Darker blue */
+            color: white;
         }
         .table td {
             vertical-align: middle;
@@ -28,30 +37,45 @@
         }
         .clickable-row {
             cursor: pointer;
+            transition: background-color 0.2s ease;
         }
         .clickable-row:hover {
-            background-color: #f1f3f5;
+            background-color: #e9ecef; /* Light gray */
+        }
+        .badge {
+            font-size: 0.8rem;
+            padding: 0.3em 0.6em;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
     <div class="container mt-5">
         <div class="card">
-            <div class="card-header bg-primary text-white">
-                <h1 class="mb-0">All Passports</h1>
+            <div class="card-header">
+                <h1 class="mb-0"><i class="fas fa-passport mr-2"></i> All Passports</h1>
             </div>
             <div class="card-body">
                 @if(session('success'))
-                    <div class="alert alert-success" role="alert">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
                 @if(session('error'))
-                    <div class="alert alert-danger" role="alert">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         {{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
-                
+
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead class="table-dark">

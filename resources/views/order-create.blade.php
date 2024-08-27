@@ -1,4 +1,3 @@
-@csrf
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +6,30 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Add New Order</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            animation: fadeInUp 1s ease-in-out;
+        }
+        .card-header {
+            background-color: #007bff;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
@@ -39,8 +62,8 @@
                         <input type="text" name="نوع التأشير" class="form-control" id="نوع_التأشير" value="{{ old('نوع التأشير') }}" required>
                     </div>
                     <div class="mb-3">
-                        <label for="عدد_مرات_الدخول" class="form-label">عدد مرات الدخول</label>
-                        <input type="text" name="عدد مرات الدخول" class="form-control" id="عدد_مرات_الدخول" value="{{ old('عدد مرات الدخول') }}" required>
+                        <label for="عدد<em>مرات</em>الدخول" class="form-label">عدد مرات الدخول</label>
+                        <input type="text" name="عدد مرات الدخول" class="form-control" id="عدد<em>مرات</em>الدخول" value="{{ old('عدد مرات الدخول') }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="الحالة" class="form-label">الحالة</label>

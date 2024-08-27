@@ -1,4 +1,3 @@
-@csrf
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,10 +10,17 @@
     <style>
         body {
             background-color: #f8f9fa;
+            animation: fadeIn 1s ease-in-out;
         }
         .card {
             border: none;
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            animation: fadeInUp 1s ease-in-out;
+        }
+        .card-header {
+            background-color: #007bff;
+            color: #ffffff;
+            font-weight: bold;
         }
         .table th {
             font-weight: 600;
@@ -31,6 +37,14 @@
         }
         .clickable-row:hover {
             background-color: #f1f3f5;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -58,7 +72,7 @@
                         {{ session('error') }}
                     </div>
                 @endif
-                
+
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead class="table-dark">

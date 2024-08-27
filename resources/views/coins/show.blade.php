@@ -1,11 +1,14 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Create New Account</title>
+    <title>عرض العملة</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             background-color: #f8f9fa;
@@ -61,51 +64,42 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="mb-4">Create New Account</h1>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1><i class="fas fa-coins"></i> تفاصيل العملة</h1>
+            <a href="{{ route('coins.index') }}" class="btn btn-primary">
+                <i class="fas fa-arrow-left"></i> العودة إلى القائمة
+            </a>
+        </div>
 
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
             </div>
         @endif
 
-        <form action="{{ route('account-store') }}" method="POST">
-            @csrf
-
-            <div class="mb-3">
-                <label for="الاسم" class="form-label">Account Name (الاسم)</label>
-                <input type="text" name="الاسم" id="الاسم" class="form-control" value="{{ old('الاسم') }}" required>
+        <div class="card">
+            <div class="card-header">
+                تفاصيل العملة #{{ $coin->id }}
             </div>
-
-            <div class="mb-3">
-                <label for="رقم_الهاتف" class="form-label">Phone Number (رقم الهاتف)</label>
-                <input type="text" name="رقم<em>الهاتف" id="رقم</em>الهاتف" class="form-control" value="{{ old('رقم_الهاتف') }}">
+            <div class="card-body">
+                <p><strong>العملة:</strong> {{ $coin->coin }}</p>
+                <p><strong>سعر العملة:</strong> {{ $coin->coin_price }}</p>
+                <p><strong>تاريخ الإنشاء:</strong> {{ $coin->created_at->format('Y-m-d H:i') }}</p>
+                <p><strong>تاريخ التحديث:</strong> {{ $coin->updated_at->format('Y-m-d H:i') }}</p>
             </div>
-
-            <div class="mb-3">
-                <label for="العنوان" class="form-label">Address (العنوان)</label>
-                <input type="text" name="العنوان" id="العنوان" class="form-control" value="{{ old('العنوان') }}">
+            <div class="card-footer">
+                <a href="{{ route('coins.edit', $coin->id) }}" class="btn btn-warning">
+                    <i class="fas fa-edit"></i> تعديل
+                </a>
+                <form action="{{ route('coins.destroy', $coin->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('هل أنت متأكد من حذف هذه العملة؟')">
+                        <i class="fas fa-trash"></i> حذف
+                    </button>
+                </form>
             </div>
-
-            <div class="mb-3">
-                <label for="account_types_id" class="form-label">Account Type (النوع)</label>
-                <select name="account_types_id" id="account_types_id" class="form-select" required>
-                    <option value="">Select Account Type</option>
-                    @foreach ($accountTypes as $type)
-                        <option value="{{ $type->id }}" {{ old('account_types_id') == $type->id ? 'selected' : '' }}>
-                            {{ $type->النوع }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-
-            <button type="submit" class="btn btn-success">Create Account</button>
-            <a href="{{ route('accounts') }}" class="btn btn-secondary">Cancel</a>
-        </form>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -64,6 +64,12 @@ class CalculationController extends Controller
     }
 
 
+    public function getPassportDetails($passportId){
+    $passport = Passport::findOrFail($passportId);
+
+    return response()->json($passport);
+}
+
 
     // Update the specified calculation in the database
     public function store(Request $request)

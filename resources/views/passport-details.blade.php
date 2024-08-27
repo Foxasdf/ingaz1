@@ -32,6 +32,20 @@
             background-color: #218838;
             border-color: #1e7e34;
         }
+        .form-label {
+            font-weight: bold;
+        }
+        .form-control {
+            padding: 0.75rem;
+        }
+        .mb-3 {
+            margin-bottom: 1.5rem;
+        }
+        @media only screen and (max-width: 768px) {
+            .card {
+                margin-bottom: 2rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -79,12 +93,12 @@
                                 <label for="الشهرة" class="form-label">الشهرة</label>
                                 <input type="text" class="form-control" id="الشهرة" name="الشهرة" value="{{ $passport['الشهرة'] }}">
                             </div>
+                        </div>
+                        <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="اسم الاب اجنبي" class="form-label">اسم الاب اجنبي</label>
                                 <input type="text" class="form-control" id="اسم الاب اجنبي" name="اسم الاب اجنبي" value="{{ $passport['اسم الاب اجنبي'] }}">
                             </div>
-                        </div>
-                        <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="الشهرة اجنبي" class="form-label">الشهرة اجنبي</label>
                                 <input type="text" class="form-control" id="الشهرة اجنبي" name="الشهرة اجنبي" value="{{ $passport['الشهرة اجنبي'] }}">

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +15,7 @@
 <body class="bg-gray-100">
     <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200">
         <div :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = false" class="fixed z-20 inset-0 bg-black opacity-50 transition-opacity lg:hidden"></div>
-    
+
         <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'" class="fixed z-30 inset-y-0 left-0 w-64 transition duration-300 transform bg-gray-900 overflow-y-auto lg:translate-x-0 lg:static lg:inset-0">
             <div class="flex items-center justify-center mt-8">
                 <div class="flex items-center">
@@ -70,6 +71,28 @@
                     </svg>
                     <span class="mx-3">All Passports</span>
                 </a>
+
+                <div class="px-4 py-2 mt-8 text-gray-400 uppercase text-sm">Calculations Manager</div>
+                <a class="flex items-center mt-4 py-2 px-6 text-gray-300 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="{{ route('calculations.index') }}">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M6 14h.01M3 17h.01" />
+                    </svg>
+                    <span class="mx-3">All Calculations</span>
+                </a>
+                <a class="flex items-center mt-4 py-2 px-6 text-gray-300 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="{{ route('calculations.create') }}">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span class="mx-3">Add Calculation</span>
+                </a>
+
+                <div class="px-4 py-2 mt-8 text-gray-400 uppercase text-sm">Coins Manager</div>
+                <a class="flex items-center mt-4 py-2 px-6 text-gray-300 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" href="{{ route('coins.index') }}">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-5-4h4m5-4v4m-5-4h4m-6 12v-3.993A9.954 9.954 0 013 12V7a5.004 5.004 0 015-5h8a5.004 5.004 0 015 5v5a9.954 9.954 0 01-3.957 8.007M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                    </svg>
+                    <span class="mx-3">All Coins</span>
+                </a>
             </nav>
         </div>
 
@@ -92,7 +115,7 @@
                         <input class="form-input w-32 sm:w-64 rounded-md pl-10 pr-4 focus:border-indigo-600" type="text" placeholder="Search">
                     </div>
                 </div>
-                
+
                 <div class="flex items-center">
                     <div x-data="{ dropdownOpen: false }" class="relative">
                         <button @click="dropdownOpen = ! dropdownOpen" class="relative block h-8 w-8 rounded-full overflow-hidden shadow focus:outline-none">
@@ -108,7 +131,7 @@
                     </div>
                 </div>
             </header>
-            
+
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
                 <nav class="bg-grey-light rounded font-sans w-full my-4 px-6">
                     <ol class="list-reset flex text-grey-dark">
@@ -122,7 +145,7 @@
 
                 <div class="container mx-auto px-6 py-8">
                     <h3 class="text-gray-700 text-3xl font-medium">Dashboard</h3>
-                    
+
                     <div class="mt-8">
                         <!-- Your main content goes here -->
                     </div>
@@ -165,4 +188,3 @@
     </script>
 </body>
 </html>
-                            

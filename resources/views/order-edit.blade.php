@@ -6,15 +6,39 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Edit Order</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            animation: fadeIn 1s ease-in-out;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            animation: fadeInUp 1s ease-in-out;
+        }
+        .card-header {
+            background-color: #007bff;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
         <h1 class="mb-4">Edit Order</h1>
-        
+
         <form action="{{ route('orders-update', $order->id) }}" method="POST">
             @csrf
             @method('PUT')
-            
+
             <div class="card mb-4">
                 <div class="card-body">
                     <h5 class="card-title">Order Information</h5>
@@ -31,8 +55,8 @@
                         <input type="text" class="form-control" id="نوع_التأشير" name="نوع التأشير" value="{{ $order['نوع التأشير'] }}" required>
                     </div>
                     <div class="mb-3">
-                        <label for="عدد_مرات_الدخول" class="form-label">عدد مرات الدخول</label>
-                        <select class="form-select" id="عدد_مرات_الدخول" name="عدد مرات الدخول" required>
+                        <label for="عدد<em>مرات</em>الدخول" class="form-label">عدد مرات الدخول</label>
+                        <select class="form-select" id="عدد<em>مرات</em>الدخول" name="عدد مرات الدخول" required>
                             <option value="مرة" {{ $order['عدد مرات الدخول'] == 'مرة' ? 'selected' : '' }}>مرة</option>
                             <option value="عدة مرات" {{ $order['عدد مرات الدخول'] == 'عدة مرات' ? 'selected' : '' }}>عدة مرات</option>
                             <option value="ذهاب وأياب" {{ $order['عدد مرات الدخول'] == 'ذهاب وأياب' ? 'selected' : '' }}>ذهاب وأياب</option>
@@ -63,28 +87,28 @@
                             <input type="text" class="form-control" id="passport_{{ $index }}_الاسم" name="passports[{{ $index }}][الاسم]" value="{{ $passport['الاسم'] }}">
                         </div>
                         <div class="mb-3">
-                            <label for="passport_{{ $index }}_رقم_الجواز" class="form-label">رقم الجواز</label>
-                            <input type="text" class="form-control" id="passport_{{ $index }}_رقم_الجواز" name="passports[{{ $index }}][رقم الجواز]" value="{{ $passport['رقم الجواز'] }}">
+                            <label for="passport_{{ $index }}<em>رقم</em>الجواز" class="form-label">رقم الجواز</label>
+                            <input type="text" class="form-control" id="passport_{{ $index }}<em>رقم</em>الجواز" name="passports[{{ $index }}][رقم الجواز]" value="{{ $passport['رقم الجواز'] }}">
                         </div>
                         <div class="mb-3">
-                            <label for="passport_{{ $index }}_نوع_الجواز" class="form-label">نوع الجواز</label>
-                            <input type="text" class="form-control" id="passport_{{ $index }}_نوع_الجواز" name="passports[{{ $index }}][نوع الجواز]" value="{{ $passport['نوع الجواز'] }}">
+                            <label for="passport_{{ $index }}<em>نوع</em>الجواز" class="form-label">نوع الجواز</label>
+                            <input type="text" class="form-control" id="passport_{{ $index }}<em>نوع</em>الجواز" name="passports[{{ $index }}][نوع الجواز]" value="{{ $passport['نوع الجواز'] }}">
                         </div>
                         <div class="mb-3">
                             <label for="passport_{{ $index }}_الجنسية" class="form-label">الجنسية</label>
                             <input type="text" class="form-control" id="passport_{{ $index }}_الجنسية" name="passports[{{ $index }}][الجنسية]" value="{{ $passport['الجنسية'] }}">
                         </div>
                         <div class="mb-3">
-                            <label for="passport_{{ $index }}_تاريخ_الاستلام" class="form-label">تاريخ الاستلام</label>
-                            <input type="date" class="form-control" id="passport_{{ $index }}_تاريخ_الاستلام" name="passports[{{ $index }}][تاريخ الاستلام]" value="{{ $passport['تاريخ الاستلام'] }}">
+                            <label for="passport_{{ $index }}<em>تاريخ</em>الاستلام" class="form-label">تاريخ الاستلام</label>
+                            <input type="date" class="form-control" id="passport_{{ $index }}<em>تاريخ</em>الاستلام" name="passports[{{ $index }}][تاريخ الاستلام]" value="{{ $passport['تاريخ الاستلام'] }}">
                         </div>
                         <div class="mb-3">
-                            <label for="passport_{{ $index }}_تاريخ_الارسال" class="form-label">تاريخ الارسال</label>
-                            <input type="date" class="form-control" id="passport_{{ $index }}_تاريخ_الارسال" name="passports[{{ $index }}][تاريخ الارسال]" value="{{ $passport['تاريخ الارسال'] }}">
+                            <label for="passport_{{ $index }}<em>تاريخ</em>الارسال" class="form-label">تاريخ الارسال</label>
+                            <input type="date" class="form-control" id="passport_{{ $index }}<em>تاريخ</em>الارسال" name="passports[{{ $index }}][تاريخ الارسال]" value="{{ $passport['تاريخ الارسال'] }}">
                         </div>
                         <div class="mb-3">
-                            <label for="passport_{{ $index }}_تاريخ_التسليم" class="form-label">تاريخ التسليم</label>
-                            <input type="date" class="form-control" id="passport_{{ $index }}_تاريخ_التسليم" name="passports[{{ $index }}][تاريخ التسليم]" value="{{ $passport['تاريخ التسليم']}}">
+                            <label for="passport_{{ $index }}<em>تاريخ</em>التسليم" class="form-label">تاريخ التسليم</label>
+                            <input type="date" class="form-control" id="passport_{{ $index }}<em>تاريخ</em>التسليم" name="passports[{{ $index }}][تاريخ التسليم]" value="{{ $passport['تاريخ التسليم']}}">
                         </div>
                     </div>
                 </div>
